@@ -1,9 +1,24 @@
 server:
   port: 8080
+  servlet:
+    context-path: /api
 
 spring:
   application:
     name: musicfy
+  cache:
+    type: simple
+    cache-names:
+      - artists
+      - albums
+      - tracks
+      - playlists
+      - userProfile
+      - topTracks
+      - topArtists
+      - recommendations
+    caffeine:
+      spec: maximumSize=500,expireAfterWrite=30m
 
 spotify:
   client:
@@ -18,4 +33,9 @@ spotify:
     - playlist-modify-public
     - playlist-modify-private
     - user-library-read
-    - user-library-modify 
+    - user-library-modify
+
+logging:
+  level:
+    com.musicfy: DEBUG
+    org.springframework.cache: TRACE 
